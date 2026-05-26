@@ -1,0 +1,29 @@
+{
+  "titulo": "Ciencias Naturales",
+  "grado": "7",
+  "bloques": [
+    {
+      "tipo": "titulo",
+      "contenido": "El Sistema Tegumentario"
+    },
+    {
+      "tipo": "texto",
+      "contenido": "El sistema tegumentario es el conjunto de órganos y estructuras que cubren y protegen el cuerpo humano del exterior."
+    },
+    {
+      "tipo": "pregunta_abierta",
+      "id": "p1",
+      "pregunta": "¿Cuáles son las tres capas de la piel?"
+    },
+    {
+      "tipo": "multiple",
+      "id": "p2",
+      "pregunta": "¿Cuál es la capa más externa de la piel?",
+      "opciones": [
+        "Dermis",
+        "Hipodermis",
+        "Epidermis"
+      ]
+    }
+  ]
+}
