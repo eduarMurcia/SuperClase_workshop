@@ -1,6 +1,8 @@
 import { renderWorkshop } from './renderer.js';
 import { setupAutosave, restoreAnswers } from './storage.js';
 import { setupProgressTracking } from './progress.js';
+import { createSession } from './session.js';
+import { startAttempt } from './api.js';
 
 const startButton = document.getElementById('start-btn');
 
@@ -12,6 +14,13 @@ startButton.addEventListener('click', async () => {
     alert('Completa nombre y grupo');
     return;
   }
+
+  const session = createSession(
+    studentName,
+    studentGroup
+  );
+
+  await startAttempt(session);
 
   const response = await fetch('./workshops/ciencias7.json');
   const workshop = await response.json();
