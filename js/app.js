@@ -1,5 +1,6 @@
 import { renderWorkshop } from './renderer.js';
 import { setupAutosave } from './storage.js';
+import { setupProgressTracking } from './progress.js';
 
 const startButton = document.getElementById('start-btn');
 
@@ -16,7 +17,9 @@ startButton.addEventListener('click', async () => {
   const workshop = await response.json();
 
   renderWorkshop(workshop);
+
   setupAutosave();
+  setupProgressTracking();
 
   document.getElementById('student-form').style.display = 'none';
 });
