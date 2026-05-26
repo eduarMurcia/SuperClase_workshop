@@ -1,14 +1,56 @@
+const STORAGE_KEY = 'superclase_answers';
+
 export function setupAutosave() {
-  document.addEventListener('input', () => {
-    const answers = {};
+  document.addEventListener('input', saveAnswers);
+  document.addEventListener('change', saveAnswers);
+}
 
-    document.querySelectorAll('textarea').forEach(textarea => {
-      answers[textarea.dataset.question] = textarea.value;
-    });
+export function restoreAnswers() {
+  const savedAnswers = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    localStorage.setItem('superclase_answers', JSON.stringify(answers));
+  if (!savedAnswers) {
+    return;
+  }
 
-    const saveStatus = document.getElementById('save-status');
-    saveStatus.textContent = 'Guardado automáticamente';
+  Object.entries(savedAnswers).forEach(([questionId, value]) => {
+    const textarea = document.querySelector(`textarea[data-question="${questionId}"]`);
+
+    if (textarea) {
+      textarea.value = value;
+    }
+
+    const radio = document.querySelector(`input[type="radio"][name="${questionId}"][value="${value}"]`);
+
+    if (radio) {
+      radio.checked = true;
+    }
   });
+
+  const saveStatus = document.getElementById('save-status');
+  saveStatus.textContent = 'Respuestas restauradas';
+}
+
+function saveAnswers() {
+  const answers = {};
+
+  document.querySelectorAll('textarea[data-question]').forEach((textarea) => {
+    answers[textarea.dataset.question] = textarea.value;
+  });
+
+  const radioGroups = {};
+
+  document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+    if (!radioGroups[radio.name]) {
+      radioGroups[radio.name] = radio;
+    }
+
+    if (radio.checked) {
+      answers[radio.name] = radio.value;
+    }
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+
+  const saveStatus = document.getElementById('save-status');
+  saveStatus.textContent = 'Guardado automáticamente';
 }
