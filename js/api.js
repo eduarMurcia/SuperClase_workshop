@@ -4,6 +4,7 @@ export async function startAttempt(session) {
 
   await fetch(API_URL, {
     method: 'POST',
+    mode: 'no-cors',
     body: JSON.stringify({
       action: 'startAttempt',
       attemptId: session.attemptId,
@@ -22,6 +23,7 @@ export async function saveAnswer(
 
   await fetch(API_URL, {
     method: 'POST',
+    mode: 'no-cors',
     body: JSON.stringify({
       action: 'saveAnswer',
       attemptId,
@@ -36,6 +38,7 @@ export async function submitAttempt(attemptId) {
 
   await fetch(API_URL, {
     method: 'POST',
+    mode: 'no-cors',
     body: JSON.stringify({
       action: 'submitAttempt',
       attemptId
