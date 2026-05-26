@@ -1,3 +1,6 @@
+import { saveAnswer } from './api.js';
+import { getSession } from './session.js';
+
 const STORAGE_KEY = 'superclase_answers';
 
 export function setupAutosave() {
@@ -34,18 +37,39 @@ function saveAnswers() {
   const answers = {};
 
   document.querySelectorAll('textarea[data-question]').forEach((textarea) => {
+
     answers[textarea.dataset.question] = textarea.value;
+
+    const session = getSession();
+
+    if (session) {
+
+      saveAnswer(
+        session.attemptId,
+        textarea.dataset.question,
+        textarea.value
+      );
+
+    }
   });
 
-  const radioGroups = {};
-
   document.querySelectorAll('input[type="radio"]').forEach((radio) => {
-    if (!radioGroups[radio.name]) {
-      radioGroups[radio.name] = radio;
-    }
 
     if (radio.checked) {
+
       answers[radio.name] = radio.value;
+
+      const session = getSession();
+
+      if (session) {
+
+        saveAnswer(
+          session.attemptId,
+          radio.name,
+          radio.value
+        );
+
+      }
     }
   });
 
