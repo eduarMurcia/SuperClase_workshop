@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuperClase Workshop</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>SuperClase</h1>
+      <div class="progress-container">
+        <p>Progreso</p>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+        <span id="progress-text">0%</span>
+      </div>
+
+      <div class="save-status" id="save-status">
+        Guardado automático activo
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="student-form" class="card">
+        <h2>Identificación del estudiante</h2>
+
+        <input type="text" id="student-name" placeholder="Nombre completo" />
+        <input type="text" id="student-group" placeholder="Grupo" />
+
+        <button id="start-btn">Comenzar workshop</button>
+      </section>
+
+      <section id="workshop-container"></section>
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
